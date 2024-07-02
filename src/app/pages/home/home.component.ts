@@ -12,5 +12,5 @@ import { IncomeHomeComponent } from '../../common/income-home/income-home.compon
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
+  user = "John";
 }

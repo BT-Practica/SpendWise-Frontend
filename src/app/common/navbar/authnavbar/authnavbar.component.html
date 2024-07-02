@@ -1,12 +1,9 @@
-<div class=" bg-slate-400 rounded-tr-2xl w-full flex flex-row gap-14 h-[3rem] items-center justify-between px-5">
-    <!-- <h1 class="absolute left-5 text-xl">SpendWise</h1> -->
-    <button mat-icon-button routerLink="/" class="flex flex-start"><img src="/assets/image.png" alt="logo_img" class="h-full"></button>
-    <div class="flex flex-row gap-6 flex-end">
-        <h1>About</h1>
-        <h1>Services</h1>
-        <h1>Features</h1>
-        <h1 class="bg-green-400 text-white px-3 py-1 rounded-lg cursor-pointer">+Add</h1>
+<div class="bg-slate-400 rounded-tr-2xl w-full flex flex-row h-[3rem] items-center justify-between">
+    <img src="/assets/image.png" alt="logo_img" class="h-full">
+    <div class="flex gap-14 px-20">
+        <button mat-icon-button routerLink="/incomes">Incomes</button>
+        <button mat-icon-button routerLink="/expenses">Expenses</button>
+        <button mat-icon-button routerLink="/savings">Economies</button>
+        <button mat-icon-button (click)="openDialog()" class="bg-green-700 p-1 w-20 text-white">Add</button>
     </div>
-    </div>
-    
-<!-- cand deschzi +add sa se deschida un dialog si sa poti alege venituri cheltuieli si economii -->
+</div>
