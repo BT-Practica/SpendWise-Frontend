@@ -5,13 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth-service/auth.service';
-import { UnauthorizedNavbarComponent } from '../../common/unauthorized-navbar/unauthorized-navbar.component';
-
+import { AuthService } from '../../core/services/auth_service/auth.service';
+import { UnauthnavbarComponent } from '../../common/navbar/unauthnavbar/unauthnavbar.component'
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, CommonModule, FormsModule, ReactiveFormsModule, UnauthorizedNavbarComponent],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, CommonModule, FormsModule, ReactiveFormsModule, UnauthnavbarComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -41,5 +40,12 @@ export class RegisterComponent {
       // this.authService.registerUser(this.username, this.email, this.password);
     }
     console.log("register");
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if(event.key == "Enter") {
+      console.log("Button pressed");
+      this.register();
+    }
   }
 }

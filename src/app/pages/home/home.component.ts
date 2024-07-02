@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { IncomeHomeComponent } from '../../common/income-home/income-home.component';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AuthnavbarComponent } from '../../common/navbar/authnavbar/authnavbar.component';
 import { ExpensesHomeComponent } from '../../common/expenses-home/expenses-home.component';
-import { AuthorizedNavbarComponent } from '../../common/authorized-navbar/authorized-navbar.component';
+import { IncomeHomeComponent } from '../../common/income-home/income-home.component';
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AuthorizedNavbarComponent, ExpensesHomeComponent, IncomeHomeComponent],
-
+  imports: [CommonModule, AuthnavbarComponent, ExpensesHomeComponent, IncomeHomeComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  basicData: any;
-  basicOptions: any;
-  routeTips = '/tips'
+
 }

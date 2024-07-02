@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './income-home.component.html',
-  styleUrl: './income-home.component.css'
+  styleUrl: './income-home.component.scss'
 })
 export class IncomeHomeComponent {
 

@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-// import { Expenses } from '../../core/interfaces/expense.table.interface';
+import { Expenses } from '../../core/interfaces/expenses.table.interface';
 import {MatTableModule} from '@angular/material/table';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-// import { DialogDataExpenses } from '../../core/interfaces/expense.dialog.interface';
-// import { AuthorizedNavbarComponent } from '../../common/authorized-navbar/authorized-navbar.component';
+import { DialogDataExpenses } from '../../core/interfaces/expenses.dialog.interface';
+import { AuthnavbarComponent } from '../../common/navbar/authnavbar/authnavbar.component';
 
 const EXPENSES_DATA : Expenses[] = [
   {id: 1, category: "Cheltuieli", subcategory: "Mancare", brand: "McDonalds", suma: "50", createdAt: new Date("20-03-2020")}, 
@@ -19,7 +19,7 @@ const EXPENSES_DATA : Expenses[] = [
 @Component({
   selector: 'app-expenses',
   standalone: true,
-  imports: [MatTableModule, MatInputModule, FormsModule, MatButtonModule, MatFormFieldModule, AuthorizedNavbarComponent],
+  imports: [MatTableModule, MatInputModule, FormsModule, MatButtonModule, MatFormFieldModule, AuthnavbarComponent],
   templateUrl: './expenses.component.html',
   styleUrl: './expenses.component.scss'
 })

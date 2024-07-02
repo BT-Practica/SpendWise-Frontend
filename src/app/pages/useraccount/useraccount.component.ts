@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UseraccountService } from '../../core/services/useraccount-service/useraccount.service';
+import { UserDetailsService } from '../../core/services/userdetails_service/user-details.service';
 import { User } from '../../core/interfaces/user.interface';
 import { CommonModule } from '@angular/common';
-import { AuthorizedNavbarComponent } from '../../common/authorized-navbar/authorized-navbar.component';
+import { AuthnavbarComponent } from '../../common/navbar/authnavbar/authnavbar.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -23,7 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatAutocompleteModule,
     MatButtonModule, 
-    AuthorizedNavbarComponent
+    AuthnavbarComponent  
   ],
   templateUrl: './useraccount.component.html',
   styleUrl: './useraccount.component.scss'
@@ -35,7 +35,7 @@ export class UseraccountComponent implements OnInit {
   user: User | undefined; 
 
   constructor(
-    private userAccountService: UseraccountService,
+    private userDetailsService: UserDetailsService,
     private route: ActivatedRoute
   ) {
     this.form = new FormGroup({
@@ -65,7 +65,7 @@ export class UseraccountComponent implements OnInit {
   }
 
   loadData(id: number): void {
-    this.userAccountService.getUserById(id).subscribe({
+    this.userDetailsService.getUserById(id).subscribe({
       next: (data) => {
         if (data) {
           this.user = data;

@@ -12,13 +12,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { UnauthorizedNavbarComponent } from '../../common/unauthorized-navbar/unauthorized-navbar.component';
 import { RouterLink } from '@angular/router';
+import { UnauthnavbarComponent } from '../../common/navbar/unauthnavbar/unauthnavbar.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, MatButton, CommonModule, MatError, UnauthorizedNavbarComponent, RouterLink],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, MatButton, CommonModule, MatError, UnauthnavbarComponent, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

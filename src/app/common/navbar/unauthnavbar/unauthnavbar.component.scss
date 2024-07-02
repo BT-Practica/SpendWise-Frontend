@@ -1,0 +1,41 @@
+.bg-slate-400 {
+    background-color: #94a3b8; // Adjust the color if necessary
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-row {
+    flex-direction: row;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-between {
+    justify-content: space-between;
+  }
+  
+  .rounded-tr-2xl {
+    border-top-right-radius: 1rem; // Adjust according to your design
+  }
+  
+  .w-full {
+    width: 100%;
+  }
+  
+  .gap-14 {
+    gap: 3.5rem; // Adjust as needed
+  }
+  
+  .px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+  
+  .h-full {
+    height: 100%; // Ensures the image takes the full height of its container
+  }
+  

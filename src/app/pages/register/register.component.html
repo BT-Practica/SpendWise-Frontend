@@ -1,9 +1,9 @@
-<app-unauthorized-navbar></app-unauthorized-navbar>
+<app-unauthnavbar></app-unauthnavbar>
 <div class="register_form">
     <div class="container form">
         <h1 class="heading"> Register </h1>
 
-        <form (ngSubmit)="register()">
+        <form (ngSubmit)="register()" (keydown)="onKeyDown($event)">
             <mat-form-field [style.width.px]=300>
                 <mat-label>Username</mat-label>
                 <input [(ngModel)]="username" class="rounded-5" matInput type="text" name="username" placeholder="Username" required>
