@@ -1,7 +1,5 @@
 export const environment = {
     baseUrl: "https://localhost:5000",
-
-    //auth
     api_login: "/api/Auth/Login",
     api_register: "/api/Auth/Register",
 
