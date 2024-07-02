@@ -35,6 +35,18 @@ export class AuthService {
       }
     });
   } 
+
+  public loginUser(username: string, password: string){
+
+    this.http.post<User>(`${environment.baseUrl}${environment.api_login}`, { username,password}).subscribe({
+      next: (res) => {
+        console.log("Login works!", res);
+      },
+      error: (error) => {
+        console.log("Something went wrong", error);
+      }
+    })
+  }
   
   public login(login: Login): Observable<LoginResponse>{
     return this.http.post<LoginResponse>(`${environment.baseUrl}${environment.api_login}`, {login}).pipe(
