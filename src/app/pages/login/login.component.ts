@@ -13,24 +13,21 @@ import {MatInputModule} from '@angular/material/input';
 import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UnauthnavbarComponent } from '../../common/navbar/unauthnavbar/unauthnavbar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Login } from '../../core/interfaces/LoginDTO/login.interface';
 // import { AuthService } from '../../core/services/auth_service/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, MatButton, CommonModule, MatError, UnauthnavbarComponent, RouterLink],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, MatButton, CommonModule, MatError, UnauthnavbarComponent, RouterLink, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
 
-  /**
-   *
-   */
-  constructor(private readonly loginService: AuthService) {
-  }
 
   email = "";
   password = ""; 
