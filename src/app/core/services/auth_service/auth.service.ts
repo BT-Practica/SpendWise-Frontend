@@ -3,15 +3,16 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environment';
 import { User } from '../../interfaces/user.interface';
 import  { jwtDecode } from 'jwt-decode';
-import { Login } from '../../interfaces/login.interface';
-import { LoginResponse } from '../../interfaces/loginresponse.interface';
+import { Login } from '../../interfaces/LoginDTO/login.interface';
+import { LoginResponse } from '../../interfaces/LoginDTO/loginresponse.interface';
 import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  private tokenKey = 'token';
   constructor(
     private http: HttpClient,
   ) { }
@@ -44,13 +45,16 @@ export class AuthService {
     })
   }
   
-  // public login(login: Login): Observable<LoginResponse>{
-  //   return this.http.post<LoginResponse>(`${environment.baseUrl}${environment.api_login}`, {login}).pipe({
-  //     map((response) => {
-    
-  //     })
-  //   });
-  // }
+  public login(login: Login): Observable<LoginResponse>{
+    return this.http.post<LoginResponse>(`${environment.baseUrl}${environment.api_login}`, {login}).pipe(
+      map((response) => {
+        if(response.isSuccess){
+          localStorage.setItem(this.tokenKey, response.token);
+        }
+        return response;
+      })
+    );
+  }
   
 
   public getToken() {
