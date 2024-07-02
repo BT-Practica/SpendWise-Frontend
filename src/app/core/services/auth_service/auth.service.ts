@@ -7,7 +7,7 @@ import { Login } from '../../interfaces/LoginDTO/login.interface';
 import { LoginResponse } from '../../interfaces/LoginDTO/loginresponse.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class AuthService {
   private tokenKey = 'token';
   constructor(
     private http: HttpClient,
-    private router: Router
+    // private router: Router
   ) { }
 
   
@@ -31,7 +31,7 @@ export class AuthService {
       },
       error: (err) => {
         console.error('Registration failed:', err);
-        this.router.navigate(['/login'])
+        // this.router.navigate(['/login'])
       }
     });
   } 

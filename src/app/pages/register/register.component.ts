@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,10 +20,10 @@ export class RegisterComponent {
   confirmEmail: string = '';
   password: string = '';
   confirmPassword: string = '';
-  
+  authService = inject(AuthService);
   error: string = '';
 
-  constructor(private authService: AuthService) {}
+  // constructor(private authService: AuthService) {}
 
   register() : void {
     if(this.username == '' || this.email == '' || this.confirmEmail == '' || this.password == '' || this.confirmPassword == '') {
@@ -39,6 +39,9 @@ export class RegisterComponent {
     }  else {
       // this.authService.registerUser(this.username, this.email, this.password);
     }
+    if(this.email == this.confirmEmail && this.password == this.confirmPassword){
+      this.authService.registerUser(this.username, this.email, this.password);
+    }
     console.log("register");
   }
 
@@ -47,5 +50,6 @@ export class RegisterComponent {
       console.log("Button pressed");
       this.register();
     }
+
   }
 }
