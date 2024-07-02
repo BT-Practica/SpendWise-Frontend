@@ -37,7 +37,7 @@ export class RegisterComponent {
     } else if (this.email != this.confirmEmail) {
       this.error = "Emails doesn't match!";
     }  else {
-      // this.authService.registerUser(this.username, this.email, this.password);
+      this.authService.registerUser(this.username, this.email, this.password);
     }
     if(this.email == this.confirmEmail && this.password == this.confirmPassword){
       this.authService.registerUser(this.username, this.email, this.password);

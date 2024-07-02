@@ -6,6 +6,7 @@ import { IncomesComponent } from './pages/incomes/incomes.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UseraccountComponent } from './pages/useraccount/useraccount.component';
+import { AuthguardService } from './core/guards/auth_guard/authguard.service';
 
 export const routes: Routes = [
     { path: 'register',  loadComponent: () => { 
@@ -22,7 +23,9 @@ export const routes: Routes = [
         return import('./pages/home/home.component').then(
             (m) => m.HomeComponent
         );   
-    } },
+    }, 
+        canActivate: [AuthguardService]
+    },
     { path: 'useraccount/:id', loadComponent: () => { 
         return import('./pages/useraccount/useraccount.component').then(
             (m) => m.UseraccountComponent

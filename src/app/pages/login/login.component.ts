@@ -33,22 +33,38 @@ export class LoginComponent {
   }
 
   email = "";
-  username = ""
-  password = "";
-message = "";
+  password = ""; 
+  user!: Login;
+  authService!: AuthService;
+  constructor(private _authService: AuthService, private matSnackBar: MatSnackBar, private router: Router){
+    this.authService = _authService;
+  }
 
   emailFormControl = new FormControl('', [Validators.required]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(8)])
 
   onLogin(): void {
-    console.log("", this.email);
-    console.log("", this.password);
-    this.loginService.loginUser(this.username, this.password);
-    
-    if(this.email === "" || this.password === "") {
-      this.message = "Please complete all the fields";
-    }else{
-      this.message = "";
-    }
+    this.user = {
+      userName: this.emailFormControl.value || '',
+      password: this.passwordFormControl.value || ''
+    };
+  
+    this.authService.login(this.user).subscribe({
+      next: (response) => {
+        this.matSnackBar.open("You are logged in", 'Close', {
+          duration: 5000,
+          horizontalPosition: 'center',
+        });
+        this.router.navigate(['']);
+      },
+      error: (error) => {
+        const errorMessage = error?.error?.response || 'Login failed. Please try again.';
+        this.matSnackBar.open(errorMessage, 'Close', {
+          duration: 5000,
+          horizontalPosition: 'center',
+        });
+      },
+    });
   }
+  
 }
