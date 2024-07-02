@@ -45,7 +45,7 @@ export class UserDetailsService {
   ];
 
   //in productie, adauga dependency injection pentru HttpClient
-  constructor( ) { }
+  constructor(private http: HttpClient) { }
 
   public getAllUsers(): User[] {
     // in productie adauga in loc de : User[] -> Observable<User[]> si decomenteaza return this.http...
@@ -60,7 +60,7 @@ export class UserDetailsService {
     // const userFound = this.http.get<User>(`${environment.baseUrl}${environment.api_getUserData}`, {params: {id :id.toString()}});
     // return userFound;
 
-    const user = this.users.find(user => user.id === id);
-    return of(user);
+    // const user = this.users.find(user => user.id === id);
+    return this.http.get<User>(`${environment.baseUrl}${environment.api_getUserData}`, {params: {id: id.toString()}});
   }
 }

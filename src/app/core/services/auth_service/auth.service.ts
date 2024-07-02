@@ -3,6 +3,9 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environment';
 import { User } from '../../interfaces/user.interface';
 import  { jwtDecode } from 'jwt-decode';
+import { Login } from '../../interfaces/login.interface';
+import { LoginResponse } from '../../interfaces/loginresponse.interface';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +31,14 @@ export class AuthService {
       }
     });
   } 
+  
+  // public login(login: Login): Observable<LoginResponse>{
+  //   return this.http.post<LoginResponse>(`${environment.baseUrl}${environment.api_login}`, {login}).pipe({
+  //     map((response) => {
+    
+  //     })
+  //   });
+  // }
   
 
   public getToken() {
