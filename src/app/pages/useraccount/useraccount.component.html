@@ -1,0 +1,37 @@
+<app-authorized-navbar></app-authorized-navbar>
+
+<div class="container">
+    <h1>My Account</h1>
+    <div class="row">
+      <form [formGroup]="form">
+        <mat-form-field [style.width.px]="300">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput type="text" placeholder="Username">
+        </mat-form-field>
+        <mat-form-field [style.width.px]="300">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput type="text" placeholder="Email">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" [style.width.px]="300">
+          <mat-label>Currency</mat-label>
+          <input type="text"
+                 placeholder="Pick one"
+                 aria-label="Number"
+                 matInput
+                 formControlName="currency"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field [style.width.px]="300">
+            <mat-label>Created At</mat-label>
+            <input formControlName="createdAt" [readonly]="true" matInput type="text">
+          </mat-form-field>
+        <button mat-flat-button [style.width.px]="300" type="submit" [disabled]="isFormPristine">Update</button>
+      </form>
+    </div>
+  </div>
+  

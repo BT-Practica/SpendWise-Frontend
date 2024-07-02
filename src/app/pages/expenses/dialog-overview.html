@@ -1,0 +1,32 @@
+<div class="dialog">
+    <div class="dialog_elements">
+        <h1 mat-dialog-title> Cheltuiala noua </h1>
+        <mat-dialog-content>
+            <p> Pe ce ai cheltuit banii? </p>
+            <mat-form-field>
+                <mat-label> Categorie </mat-label>
+                <input matInput [(ngModel)]="category" />
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label> Subcategorie </mat-label>
+                <input matInput [(ngModel)]="subcategory" />
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label> Brand </mat-label>
+                <input matInput [(ngModel)]="brand"/>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label> Suma </mat-label>
+                <input matInput [(ngModel)]="suma"/>
+            </mat-form-field>
+            <br />
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button mat-button (click)="onNoClick()"> Anuleaza </button>
+            <button mat-button [mat-dialog-close]="" cdkFocusInitial> Salveaza </button>
+        </mat-dialog-actions>
+    </div>
+</div>
