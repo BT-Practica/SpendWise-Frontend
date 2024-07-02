@@ -24,10 +24,9 @@ export class AuthService {
     if(environment.baseUrl == "" && environment.api_register == "") {
       console.error("Environment variables not set yet!");
     }
-    
     this.http.post<User>(`${environment.baseUrl}${environment.api_register}`, { username, email, password }).subscribe({
       next: (res) => {
-        console.log('Registration successful:', res);
+        console.log('Registration successful:', res.token);
       },
       error: (err) => {
         console.error('Registration failed:', err);
@@ -41,6 +40,7 @@ export class AuthService {
     this.http.post<User>(`${environment.baseUrl}${environment.api_login}`, { username,password}).subscribe({
       next: (res) => {
         console.log("Login works!", res);
+        localStorage.setItem("token", res.token);
       },
       error: (error) => {
         console.log("Something went wrong", error);

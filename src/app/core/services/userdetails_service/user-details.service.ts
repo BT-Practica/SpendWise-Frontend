@@ -16,7 +16,8 @@ export class UserDetailsService {
       email: 'johndoe@email.com',
       password: 'johndoe',
       createdAt: new Date('2024-02-21'),
-      currency: 'USD'
+      currency: 'USD',
+            token: ""
     },
     {
       id: 2,
@@ -24,7 +25,8 @@ export class UserDetailsService {
       email: 'janedoe@email.com',
       password: 'janedoe',
       createdAt: new Date('2024-02-22'),
-      currency: 'EUR'
+      currency: 'EUR',
+            token: ""
     },
     {
       id: 3,
@@ -32,7 +34,8 @@ export class UserDetailsService {
       email: 'joedoe@email.com',
       password: 'joedoe',
       createdAt: new Date('2024-02-23'),
-      currency: 'RON'
+      currency: 'RON',
+            token: ""
     },
     {
       id: 4,
@@ -40,7 +43,8 @@ export class UserDetailsService {
       email: 'jimdoe@email.com',
       password: 'jimdoe',
       createdAt: new Date('2024-02-20'),
-      currency: 'GBP'
+      currency: 'GBP',
+      token: ""
     }
   ];
 

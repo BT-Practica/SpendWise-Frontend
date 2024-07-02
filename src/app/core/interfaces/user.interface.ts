@@ -5,4 +5,5 @@ export interface User {
     password: string;
     createdAt: Date;
     currency: string;
+    token: string;
 }

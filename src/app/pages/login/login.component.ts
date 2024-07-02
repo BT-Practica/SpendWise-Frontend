@@ -37,7 +37,7 @@ export class LoginComponent {
   password = "";
 message = "";
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  emailFormControl = new FormControl('', [Validators.required]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(8)])
 
   onLogin(): void {
