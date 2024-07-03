@@ -4,6 +4,7 @@ export interface Incomes {
     registrationDate: Date
     description: string,
     reccurence: boolean,
-    income_category: Income,
+    amount: number,
+    income_category: string,
     incomeCategoryId: number
 }
