@@ -1,7 +1,10 @@
 <div class="bg-slate-400 rounded-tr-2xl w-full flex flex-row h-[3rem] items-center justify-between">
-    <img src="/assets/image.png" alt="logo_img" class="h-full">
-    <div class="flex gap-14 px-20">
-        <button mat-icon-button routerLink="/incomes">Incomes</button>
+    <div class="flex gap-14 px-5 justify-start">
+        <button mat-icon-button routerLink=""> <img src="/assets/image.png" alt="logo_img" style="height: 60px;"> </button>
+    </div>
+
+    <div class="flex gap-14 px-5 justify-end">
+        <button mat-icon-button routerLink="/incomes" class>Incomes</button>
         <button mat-icon-button routerLink="/expenses">Expenses</button>
         <button mat-icon-button routerLink="/savings">Economies</button>
         <button mat-icon-button (click)="openDialog()" class="bg-green-700 

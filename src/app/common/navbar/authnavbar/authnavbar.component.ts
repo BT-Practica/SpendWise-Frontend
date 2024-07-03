@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { ExpensesComponent } from '../../../pages/expenses/expenses.component';
 import { IncomesComponent } from '../../../pages/incomes/incomes.component';
 import { SavingsComponent } from '../../../pages/savings/savings.component';
-import { AuthService } from '../../../core/services/auth_service/auth.service';
-import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-authnavbar',
@@ -37,4 +38,26 @@ export class AuthnavbarComponent {
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, ExpensesComponent, IncomesComponent, SavingsComponent, RouterLink],
 })
-export class NavbarDialogContent {}
+export class NavbarDialogContent {
+  constructor(private dialog: MatDialog){}
+
+  public incomeDialog(){
+    const incomeDialogRef = this.dialog.open(IncomeDialogContent);
+  }
+}
+
+@Component({
+  selector: 'income-dialog-content',
+  templateUrl: './income-dialog.content.html',
+  standalone: true,
+  imports: [MatDialogModule, MatButtonModule, ExpensesComponent, IncomesComponent, SavingsComponent, RouterLink, MatFormFieldModule, MatInputModule, MatSelectModule],
+})
+export class IncomeDialogContent{
+  constructor(private dialogRef: MatDialogRef<AuthnavbarComponent>){}
+  closeDialog(): void{
+    this.dialogRef.componentInstance.dialog.open(NavbarDialogContent);
+  }
+}
+
+
+
