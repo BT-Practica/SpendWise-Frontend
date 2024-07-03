@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { AuthnavbarComponent, NavbarDialogContent } from '../../common/navbar/authnavbar/authnavbar.component';
 import { Incomes } from '../../core/interfaces/incomes.interface';
+import { CommonModule } from '@angular/common';
+import { Dialog } from '@angular/cdk/dialog';
+import { DialogIncomesComponent } from './dialog-incomes/dialog-incomes.component';
 
 const INCOMES_DATA: Incomes[] = [
   { registrationDate: new Date("2022-01-01"), description: "Salary", reccurence: true, amount: 5000, income_category: "Employment", incomeCategoryId: 1 },
@@ -24,7 +26,11 @@ const INCOMES_DATA: Incomes[] = [
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule, 
+    MatDialogActions, 
+    MatDialogClose, 
+    MatDialogContent, 
+    MatDialogTitle
   ],
   templateUrl: './incomes.component.html',
   styleUrls: ['./incomes.component.scss'],
@@ -40,6 +46,14 @@ export class IncomesComponent {
   income_category: string = '';
   incomeCategoryId: number = 0;
 
+  categories: string[] = [
+    "Salary",
+    "",
+    "Other",
+    "Investment",
+    "Real Estate"
+  ];
+
   isEdit: boolean = false;
 
   displayedColumns: string[] = ["registrationDate", "description", "amount", "income_category"];
@@ -51,7 +65,14 @@ export class IncomesComponent {
 
   dialogTitle: string = "";
 
-  addExpense(): void {
-    // Implement addExpense functionality
+  addIncome(): void {
+    const dialogRef = this.dialog.open(DialogIncomesComponent, {
+      data: {
+        category: this.income_category,
+        subcategory: this.income_category,
+        brand: this.income_category,
+        suma: this.income_category
+      }
+    })
   }
 }

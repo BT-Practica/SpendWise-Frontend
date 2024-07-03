@@ -28,7 +28,8 @@ export const environment = {
     //Income endpoints
     api_incomes_getIncomes: "/api/Incomes/GetIncomes",
     api_incomes_getIncomesByUserId: "/api/Incomes/GetIncomesByUserId",
-    api_incomes_put: "/api/Incomes/AddIncome",
+    api_incomes_addIncome: "/api/Incomes/AddIncomes",
+    api_incomes_put: "/api/Incomes/UpdateIncomes",
     api_incomes_delete: "/api/Incomes/DeleteIncomes",
 
     //User endpoints
