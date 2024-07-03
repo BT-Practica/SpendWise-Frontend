@@ -63,27 +63,41 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  public signOut(){
+    localStorage.removeItem("token");
+    return window.location.reload(); //just reload without hard coding to send to route of /login because we added guard to login 
+  }
+
   public isAuthenticated(): boolean {
-    const token = this.getToken();
-    return this.tokenNotExpired(token);
-  }
-
-  private tokenNotExpired(token: string | null): boolean {
-    if (token == null) {
+    // const token = this.getToken();
+    // return this.tokenNotExpired(token);
+    const token = localStorage.getItem("token");
+    if (!token) {
       return false;
     }
-
-    try {
-      const decodeToken: any = jwtDecode(token);
-      if (!decodeToken || !decodeToken.exp) {
-        return false;
-      }
-      const currentTime = Math.floor(Date.now() / 1000);
-      return decodeToken.exp > currentTime;
-    } catch (error) {
-      return false;
-    }
+    const payload = JSON.parse(atob(token!.split('.')[1])); //decode 
+    console.log(payload);
+    const currentTime = Math.floor(Date.now() / 1000);
+    return payload.exp > currentTime;
   }
+
+  //OTHER METHOD
+  // private tokenNotExpired(token: string | null): boolean {
+  //   if (token == null) {
+  //     return false;
+  //   }
+
+  //   try {
+  //     const decodeToken: any = jwtDecode(token);
+  //     if (!decodeToken || !decodeToken.exp) {
+  //       return false;
+  //     }
+  //     const currentTime = Math.floor(Date.now() / 1000);
+  //     return decodeToken.exp > currentTime;
+  //   } catch (error) {
+  //     return false;
+  //   }
+  // }
 }
 
 
