@@ -1,0 +1,21 @@
+<div class="flex justify-center items-center flex-col h-1/4">
+    <h6 class="font-sans font-bold text-center py-10 text-xl">Enter your income category budget</h6>
+    <form class="w-10/12 h-96 px-5 pt-7">
+        <mat-form-field class="w-full p-5 ">
+          <mat-label>Select your category income</mat-label>
+          <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+      
+        <mat-form-field class="w-full px-5 pt-5">
+          <mat-label>Enter your budget</mat-label>
+          <input matInput placeholder="" type="text" required>
+        </mat-form-field>
+    </form>
+    <div class="flex flex-row pb-20 m-">
+        <button type="submit" class=" bg-blue-500 rounded-lg text-white font-semibold hover:bg-blue-500 transition duration-300 px-3 mx-3" >Submit</button>
+        <button type="button" class=" bg-blue-500 rounded-lg text-white font-semibold hover:bg-blue-500 transition duration-300 px-3 mx-3" (click)="closeDialog()">Cancel</button>
+    </div>
+</div>

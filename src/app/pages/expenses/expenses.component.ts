@@ -67,13 +67,13 @@ export class ExpensesComponent {
   standalone: true, 
   imports: [
     MatFormFieldModule,
-    MatInputModule, 
-    FormsModule, 
-    MatButtonModule, 
-    MatDialogTitle, 
-    MatDialogContent, 
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
     MatDialogActions,
-    MatDialogClose
+    MatDialogClose,
   ],
 })
 

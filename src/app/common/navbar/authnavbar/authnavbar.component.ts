@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+<<<<<<< HEAD
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -8,6 +9,16 @@ import { UserDetailsService } from '../../../core/services/userdetails_service/u
 import { User } from '../../../core/interfaces/user.interface';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+=======
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { RouterLink } from '@angular/router';
+import { ExpensesComponent } from '../../../pages/expenses/expenses.component';
+import { IncomesComponent } from '../../../pages/incomes/incomes.component';
+import { SavingsComponent } from '../../../pages/savings/savings.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+>>>>>>> 9507982038e84bb0646c722b73e6a5729b0f9e2b
 
 @Component({
   selector: 'app-authnavbar',
@@ -74,4 +85,26 @@ export class AuthnavbarComponent implements OnInit {
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, RouterLink],
 })
-export class NavbarDialogContent {}
+export class NavbarDialogContent {
+  constructor(private dialog: MatDialog){}
+
+  public incomeDialog(){
+    const incomeDialogRef = this.dialog.open(IncomeDialogContent);
+  }
+}
+
+@Component({
+  selector: 'income-dialog-content',
+  templateUrl: './income-dialog.content.html',
+  standalone: true,
+  imports: [MatDialogModule, MatButtonModule, ExpensesComponent, IncomesComponent, SavingsComponent, RouterLink, MatFormFieldModule, MatInputModule, MatSelectModule],
+})
+export class IncomeDialogContent{
+  constructor(private dialogRef: MatDialogRef<AuthnavbarComponent>){}
+  closeDialog(): void{
+    this.dialogRef.componentInstance.dialog.open(NavbarDialogContent);
+  }
+}
+
+
+
