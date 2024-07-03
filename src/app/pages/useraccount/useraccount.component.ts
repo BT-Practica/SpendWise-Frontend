@@ -4,13 +4,14 @@ import { User } from '../../core/interfaces/user.interface';
 import { CommonModule } from '@angular/common';
 import { AuthnavbarComponent } from '../../common/navbar/authnavbar/authnavbar.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-useraccount',
@@ -23,7 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatAutocompleteModule,
     MatButtonModule, 
-    AuthnavbarComponent  
+    AuthnavbarComponent,
+    CommonModule,
   ],
   templateUrl: './useraccount.component.html',
   styleUrl: './useraccount.component.scss'
@@ -45,23 +47,31 @@ export class UseraccountComponent implements OnInit {
       createdAt: new FormControl('')
     });
   }
+  userId!: string; // Define userId property
+  userData: User | undefined;
 
-  ngOnInit() {
-    this.filteredOptions = this.form.get('currency')!.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || ''))
-    );
-
-    // Extract the ID from the URL and load user data
-    this.route.paramMap.subscribe(params => {
-      const idParam = params.get('id');
-      if (idParam) {
-        const id = +idParam;
-        this.loadData(id);
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.userId = params['userId']; // Get userId from route params
+      if (this.userId) {
+        this.getUserData(); // Fetch user data if userId is available
       } else {
-        console.error('ID parameter not found');
+        console.error('No userId found.');
       }
     });
+  }
+
+  getUserData(): void {
+    this.userDetailsService.getUserById(parseInt(this.userId)).subscribe(
+      (user?: User) => {
+        this.userData = user;
+        console.log('User data:', this.userData);
+        // Additional logic to handle user data
+      },
+      error => {
+        console.error('Error fetching user data', error);
+      }
+    );
   }
 
   loadData(id: number): void {
@@ -91,4 +101,5 @@ export class UseraccountComponent implements OnInit {
   get isFormPristine(): boolean {
     return this.form.pristine;
   }
+
 }

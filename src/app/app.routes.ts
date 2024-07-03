@@ -26,11 +26,13 @@ export const routes: Routes = [
     }, 
         canActivate: [AuthguardService]
     },
-    { path: 'useraccount/:id', loadComponent: () => { 
+    { path: 'useraccount/:userId', loadComponent: () => { 
         return import('./pages/useraccount/useraccount.component').then(
             (m) => m.UseraccountComponent
         );   
-    } },
+        
+    } 
+},
     { path: "expenses", loadComponent: () => { 
         return import('./pages/expenses/expenses.component').then(
             (m) => m.ExpensesComponent
@@ -73,12 +75,12 @@ export const routes: Routes = [
         }
         // de implementat guard route pentru resetpassword!! user ul nu poate accesa path-ul cu resetpassword
     },
-    {
-        path: "userprofile",
-        loadComponent:()=>{
-            return import("./pages/user-profile/user-profile.component").then(
-                (m) => m.UserProfileComponent
-            )
-        }
-    }
+    // {
+    //     path: "userprofile",
+    //     loadComponent:()=>{
+    //         return import("./pages/user-profile/user-profile.component").then(
+    //             (m) => m.UserProfileComponent
+    //         )
+    //     }
+    // }
 ];
