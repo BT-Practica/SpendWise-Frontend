@@ -65,6 +65,6 @@ export class UserDetailsService {
     // return userFound;
 
     // const user = this.users.find(user => user.id === id);
-    return this.http.get<User>(`${environment.baseUrl}${environment.api_getUserData}`, {params: {id: id.toString()}});
+    return this.http.get<User>(`${environment.baseUrl}${environment.api_getUserData}`, {params: {userId: id.toString()}});
   }
 }
