@@ -4,6 +4,11 @@
         <button mat-icon-button routerLink="/incomes">Incomes</button>
         <button mat-icon-button routerLink="/expenses">Expenses</button>
         <button mat-icon-button routerLink="/savings">Economies</button>
-        <button mat-icon-button (click)="openDialog()" class="bg-green-700 p-1 w-20 text-white">Add</button>
+        <button mat-icon-button (click)="openDialog()" class="bg-green-700 
+        p-1 w-20 text-white rounded-md">Add</button>
+        <div *ngIf="checkIfIsLogged" class="flex flex-row">
+            <img [src]="profilePhoto" class="w-10 h-10 cursor-pointer mr-10" [routerLink]="['userprofile']" routerLinkActive="router-link-active" />
+            <button (click)="signOut()">Sign Out</button>
+        </div>
     </div>
 </div>

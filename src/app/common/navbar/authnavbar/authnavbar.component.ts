@@ -5,11 +5,13 @@ import { RouterLink } from '@angular/router';
 import { ExpensesComponent } from '../../../pages/expenses/expenses.component';
 import { IncomesComponent } from '../../../pages/incomes/incomes.component';
 import { SavingsComponent } from '../../../pages/savings/savings.component';
+import { AuthService } from '../../../core/services/auth_service/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-authnavbar',
   standalone: true,
-  imports: [MatDialogModule, RouterLink],
+  imports: [MatDialogModule, RouterLink, CommonModule],
   templateUrl: './authnavbar.component.html',
   styleUrl: './authnavbar.component.scss'
 })
@@ -23,6 +25,10 @@ export class AuthnavbarComponent {
       console.log(`Dialog result: ${result}`);
     });
   }
+  profilePhoto :string = "../../../../assets/profile-user.png"
+  authService = inject(AuthService);  
+  checkIfIsLogged = this.authService.isAuthenticated();
+  signOut = this.authService.signOut;
 }
 
 @Component({

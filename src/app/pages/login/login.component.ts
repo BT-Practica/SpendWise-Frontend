@@ -48,7 +48,7 @@ export class LoginComponent {
   
     this.authService.login(this.user).subscribe({
       next: (response) => {
-        this.matSnackBar.open("You are logged in", 'Close', {
+        this.matSnackBar.open("You are logged in", 'Close', { //pop up after the user loggin
           duration: 5000,
           horizontalPosition: 'center',
         });
