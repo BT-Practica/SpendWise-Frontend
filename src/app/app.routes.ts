@@ -72,5 +72,13 @@ export const routes: Routes = [
             )
         }
         // de implementat guard route pentru resetpassword!! user ul nu poate accesa path-ul cu resetpassword
+    },
+    {
+        path: "userprofile",
+        loadComponent:()=>{
+            return import("./pages/user-profile/user-profile.component").then(
+                (m) => m.UserProfileComponent
+            )
+        }
     }
 ];
