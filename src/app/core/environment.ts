@@ -21,6 +21,7 @@ export const environment = {
 
     //Expense_Categories endpoints
     api_expensecategories_get: "/api/Expense_Categories/GetExpenses",
+    api_expensecategories_post: "/api/Expense_Categories/AddExpense_Category",
 
     //Income categories endpoints
     api_incomeCategories_getIncomeCategories: "/api/Income_Categories/GetIncomeCategories",
@@ -31,7 +32,7 @@ export const environment = {
     //Income endpoints
     api_incomes_getIncomes: "/api/Incomes/GetIncomes",
     api_incomes_getIncomesByUserId: "/api/Incomes/GetIncomesByUserId",
-    api_incomes_addIncome: "/api/Incomes/AddIncomes",
+    api_incomes_createIncome: "/api/Incomes/CreateIncomes",
     api_incomes_put: "/api/Incomes/UpdateIncomes",
     api_incomes_delete: "/api/Incomes/DeleteIncomes",
 

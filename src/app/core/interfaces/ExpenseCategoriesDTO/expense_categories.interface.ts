@@ -1,3 +1,4 @@
 export interface ExpenseCategories {
-    name: string,
+    Name: string,
+    UserId: number
 }

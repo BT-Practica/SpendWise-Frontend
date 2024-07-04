@@ -1,6 +1,7 @@
 export interface AddIncome {
-    description: string, 
-    reccurence: boolean, 
-    income_category: number, 
-    amount: number
+    Income_CategoryName: string, 
+    Amount: number
+    Description: string, 
+    Reccurence: boolean, 
+    UserId: number
 }
