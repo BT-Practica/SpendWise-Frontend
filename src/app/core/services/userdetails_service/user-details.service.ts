@@ -67,4 +67,8 @@ export class UserDetailsService {
     // const user = this.users.find(user => user.id === id);
     return this.http.get<User>(`${environment.baseUrl}${environment.api_getUserData}`, {params: {userId: id.toString()}});
   }
+
+  public getUserByNameId(nameId: string): Observable<User | undefined> {
+    return this.http.get<User>(`${environment.baseUrl}${environment.api_getUserData}`, {params: {nameid: nameId}});
+  }
 }
