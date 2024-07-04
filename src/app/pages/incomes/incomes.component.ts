@@ -9,6 +9,7 @@ import { Incomes } from '../../core/interfaces/incomes.interface';
 import { CommonModule } from '@angular/common';
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogIncomesComponent } from './dialog-incomes/dialog-incomes.component';
+import { AuthnavbarComponent } from '../../common/navbar/authnavbar/authnavbar.component';
 
 const INCOMES_DATA: Incomes[] = [
   { registrationDate: new Date("2022-01-01"), description: "Salary", reccurence: true, amount: 5000, income_category: "Employment", incomeCategoryId: 1 },

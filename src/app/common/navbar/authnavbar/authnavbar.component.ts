@@ -26,6 +26,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AuthnavbarComponent {
   readonly dialog = inject(MatDialog);
 
+  constructor(
+    private authService: AuthService
+  ) {}
+
+  checkIfIsLogged: boolean = this.authService.isAuthenticated();
+  profilePhoto: string = '';
+
   openDialog() {
     const dialogRef = this.dialog.open(NavbarDialogContent);
 

@@ -9,9 +9,9 @@
         <button mat-icon-button routerLink="/savings">Economies</button>
         <button mat-icon-button (click)="openDialog()" class="bg-green-700 
         p-1 w-20 text-white rounded-md">Add</button>
-        <div *ngIf="checkIfIsLogged" class="flex flex-row">
+        <!-- <div *ngIf="checkIfIsLogged" class="flex flex-row">
             <img [src]="profilePhoto" class="w-10 h-10 cursor-pointer mr-10" [routerLink]="['useraccount', getUserData]" />
             <button (click)="signOut()">Sign Out</button>
-        </div>
+        </div> -->
     </div>
 </div>

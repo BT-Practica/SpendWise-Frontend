@@ -20,18 +20,11 @@ export class ExpensesService {
   }
 
   public getExpensesByUser() : void {
-    this.http.get<any>(`${environment.baseUrl}${environment.api_expenses_getByUser}`).subscribe({
-      next: (res) => { 
-
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+    this.http.get<any>(`${environment.baseUrl}${environment.api_expenses_getByUser}`);
   }
 
-  public addExpense(amount: number, description: string, userid: number, expense_categoryId: number, currencyId: number): Observable<Expenses> {
-    return this.http.post<Expenses>(`${environment.baseUrl}${environment.api_expenses_put}`, {amount, description, userid, expense_categoryId, currencyId});
+  public addExpense(category: string, subcategory: string, brand: string, suma: string, createdAt: Date): Observable<Partial<Expenses>> {
+    return this.http.post<Expenses>(`${environment.baseUrl}${environment.api_expenses_put}`, {subcategory, brand, suma, createdAt});
   }
 
   public deleteExpense(id: number): Observable<Expenses> {

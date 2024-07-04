@@ -11,6 +11,12 @@ import { Route, Router } from '@angular/router';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+/* 
+"ConnectionStrings": {
+  "DefaultConnection": "Server=RAZVANC\\SQLEXPRESS;Database=SpendWiseDB;TrustServerCertificate=true;Trusted_Connection=true;"
+},
+*/
+
 @Injectable({
   providedIn: 'root'
 })
