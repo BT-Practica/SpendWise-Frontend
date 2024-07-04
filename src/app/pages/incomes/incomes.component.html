@@ -1,6 +1,6 @@
 <div class="container incomes">
     <h1 class="headerIncomes"> Venituri </h1>
-    <button mat-flat-button color="primary" style="padding: 20px; margin: 20px 0px;"> Adaugare venit </button>
+    <button mat-flat-button color="primary" style="padding: 20px; margin: 20px 0px;" (click)="addIncome()"> Adaugare venit </button>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="registrationDate">
