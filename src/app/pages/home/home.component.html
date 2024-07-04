@@ -3,17 +3,20 @@
     <div class="grid grid-cols-3 justify-center items-center m-10 gap-10 ">
         <div class="mt-2 text-center bg-gradient-to-r from-green-500 to-lime-500 to- rounded-2xl h-[6rem] flex justify-center items-center flex-col">
             <h1>Total period income</h1>
-            <p class="ml-10 text-3xl">€PRICE</p>
+            <p class="ml-10 text-3xl">{{income_total}}</p>
         </div>
         <div class="text-center bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl h-[6rem] flex justify-center items-center flex-col">
             <h1>Total period Expenses</h1>
-            <p class="ml-10 text-3xl">€PRICE</p>
+            <p class="ml-10 text-3xl">{{expenses_total}}</p>
         </div>
         <div class="text-center bg-gradient-to-r from-blue-500 to-cyan-500  rounded-2xl h-[6rem] flex justify-center items-center flex-col">
             <h1>Total Balance</h1>
-            <p class="ml-10 text-3xl">€PRICE</p>
+            <p class="ml-10 text-3xl">{{balance_total}}</p>
         </div>
     </div>
+
+    <!-- TODO : EGALITATE LATURI  -->
+    <!-- TODO: ALINIERE IN DIV CARDURI -->
     
     <div class="bg-white cta">
       <div class="mx-auto max-w-7xl py-10 sm:px-6 sm:py-10 lg:px-10">
@@ -47,26 +50,58 @@
       </div>
     </div>
     
-  
-    <div class="card-chart">
-        <h1 class="text-3xl accountBalance"><b>Account Balance</b></h1>
-        <!-- <apx-chart
-        [series]="chartOptions.series"
-        [chart]="chartOptions.chart"
-        [xaxis]="chartOptions.xaxis"
-        [stroke]="chartOptions.stroke"
-        [tooltip]="chartOptions.tooltip"
-        [dataLabels]="chartOptions.dataLabels"
-      ></apx-chart> -->
+    <div class="columns-2">      
+      <div>
+        <h1 class="headingTableExpenses font-semibold"> Cheltuieli </h1>
+        <div class="mat-elevationa-z8">
+          <table mat-table dataSource=[]> 
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef=""></th>
+              <td mat-cell *matCellDef=""></td>
+            </ng-container>
+
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef=""></th>
+              <td mat-cell *matCellDef=""></td>
+            </ng-container>
+
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef=""></th>
+              <td mat-cell *matCellDef=""></td>
+            </ng-container>
+
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef=""></th>
+              <td mat-cell *matCellDef=""></td>
+            </ng-container>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h1 class="headingTableIncomes font-semibold"> Venituri </h1>
+        <div class="mat-elevationa-z8">
+          <table mat-table dataSource=[]> 
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef=""></th>
+              <td mat-cell *matCellDef=""></td>
+            </ng-container>
+
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef=""></th>
+              <td mat-cell *matCellDef=""></td>
+            </ng-container>
+
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef=""></th>
+              <td mat-cell *matCellDef=""></td>
+            </ng-container>
+
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef=""></th>
+              <td mat-cell *matCellDef=""></td>
+            </ng-container>
+          </table>
+        </div>
+      </div>
+
     </div>
-  
-    <!-- <div class="card-chart-expenses">
-        <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
-    </div> -->
-  </div>
-  
-  
-  <div class="mt-10">
-  <app-income-home></app-income-home>
-  <app-expenses-home></app-expenses-home>
-  </div>
