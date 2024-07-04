@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogActions, MatDialogConfig, MatDialogContent, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Route, Router, RouterLink } from '@angular/router';
 import { ExpensesComponent } from '../../../pages/expenses/expenses.component';
 import { IncomesComponent } from '../../../pages/incomes/incomes.component';
@@ -18,13 +18,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-authnavbar',
   standalone: true,
-  imports: [MatDialogModule, RouterLink, CommonModule],
+  imports: [MatDialogModule, RouterLink, CommonModule, MatDialogContent, MatDialogActions ],
   templateUrl: './authnavbar.component.html',
   styleUrls: ['./authnavbar.component.scss']
 })
 
 export class AuthnavbarComponent {
   readonly dialog = inject(MatDialog);
+  authService = inject(AuthService);
 
   openDialog() {
     const dialogRef = this.dialog.open(NavbarDialogContent);
