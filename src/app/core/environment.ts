@@ -19,6 +19,9 @@ export const environment = {
     api_expenses_put: "/api/Expenses/AddExpense",
     api_expenses_delete: "/api/Expenses/RemoveExpense",
 
+    //Expense_Categories endpoints
+    api_expensecategories_get: "/api/Expense_Categories/GetExpenses",
+
     //Income categories endpoints
     api_incomeCategories_getIncomeCategories: "/api/Income_Categories/GetIncomeCategories",
     api_incomeCategories_getIncomeCategory: "/api/Income_Categories/GetIncomeCategory",

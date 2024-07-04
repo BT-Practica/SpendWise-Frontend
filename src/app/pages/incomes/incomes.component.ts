@@ -26,11 +26,8 @@ const INCOMES_DATA: Incomes[] = [
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatFormFieldModule, 
-    MatDialogActions, 
-    MatDialogClose, 
-    MatDialogContent, 
-    MatDialogTitle
+    MatFormFieldModule,
+    AuthnavbarComponent
   ],
   templateUrl: './incomes.component.html',
   styleUrls: ['./incomes.component.scss'],

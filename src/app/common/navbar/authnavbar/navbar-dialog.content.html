@@ -4,7 +4,7 @@
         <button class="h-[2rem] w-[7rem] bg-green-400 text-lg rounded text-black" mat-dialog-close (click)="incomeDialog()">
             <i class="bi bi-coin"></i>Incomes
         </button>
-        <button class="h-[2rem] w-[7rem] bg-yellow-400 text-lg rounded text-black" [routerLink]="['/savings']" mat-dialog-close>
+        <button class="h-[2rem] w-[7rem] bg-yellow-400 text-lg rounded text-black" mat-dialog-close (click)="savingDialog()">
             Savings
         </button>
         <button [routerLink]="['/expenses']" class="h-[2rem] w-[7rem] bg-red-400 text-lg rounded text-black" mat-dialog-close> 
