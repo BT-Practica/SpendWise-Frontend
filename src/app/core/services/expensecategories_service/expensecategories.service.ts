@@ -6,22 +6,26 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { ExpenseCategories } from '../../interfaces/ExpenseCategoriesDTO/expense_categories.interface';
+import { JwtDecoderService } from '../../jwt_decoder/jwt-decoder.service';
+import { jwtDecode } from 'jwt-decode';
+import { ExtractExpenseCategories } from '../../interfaces/ExpenseCategoriesDTO/extract_expensecategories';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpensecategoriesService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private jwtDecoder: JwtDecoderService) {}
+
+  userId = this.jwtDecoder.userId;
 
   public getExpenseCategoriesByUser(): Observable<any> {
-    const params = new HttpParams().set('userId', 1);
-    return this.http.get<any>(`${environment.baseUrl}${environment.api_incomeCategories_getIncomeCategories}`, {params})
+    const params = new HttpParams().set('userId', this.userId);
+    return this.http.get<any>(`${environment.baseUrl}${environment.api_expensecategories_get}`, {params})
       .pipe(
         tap(data => console.log('Fetched categories:', data)),
-        map(response => response),  // Perform any transformation if needed
         catchError(error => {
-          console.error('Error fetching categoriesdodo:', error);
+          console.error('Error fetching categories:', error);
           return throwError(() => new Error('Error fetching categories'));
         })
       );
@@ -37,7 +41,9 @@ export class ExpensecategoriesService {
         catchError((error) => {
             console.log("Error in login API call: ", error);
             return throwError(error);
-        })
+        }),
       )
   }
+
+
 }

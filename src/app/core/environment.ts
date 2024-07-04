@@ -16,16 +16,15 @@ export const environment = {
     //Expenses endpoints
     api_expenses_get: "/api/Expenses/GetExpenses",
     api_expenses_getByUser: "/api/Expenses/GetExpenseByUser",
-    api_expenses_put: "/api/Expenses/AddExpense",
+    api_expenses_post: "/api/Expenses/AddExpense",
     api_expenses_delete: "/api/Expenses/RemoveExpense",
 
     //Expense_Categories endpoints
-    api_expensecategories_get: "/api/Expense_Categories/GetExpenses",
+    api_expensecategories_get: "/api/Expense_Categories/GetExpenseCategoriesByUserId",
     api_expensecategories_post: "/api/Expense_Categories/AddExpense_Category",
 
     //Income categories endpoints
     api_incomeCategories_getIncomeCategories: "/api/Income_Categories/GetIncomeCategories",
-    api_incomeCategories_getIncomeCategory: "/api/Income_Categories/GetIncomeCategory",
     api_incomeCategories_addIncomeCategory: "/api/Income_Categories/AddIncomeCategories",
     api_incomeCategories_deleteIncomeCategory: "/api/Income_Categories/DeleteIncomeCategories",
 

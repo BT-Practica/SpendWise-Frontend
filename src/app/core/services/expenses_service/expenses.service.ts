@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Expenses } from '../../interfaces/expenses.table.interface';
 import { environment } from '../../environment';
+import { ExpensePost } from '../../interfaces/ExpensesDTO/expensesPost.inteface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +16,17 @@ export class ExpensesService {
     private router: Router
   ) { }
 
-  public getExpenses() : Observable<Expenses[]> {
-    return this.http.get<Expenses[]>(`${environment.baseUrl}${environment.api_expenses_get}`);
+  public postNewExpenseCategory(expensePost: ExpensePost): Observable<ExpensePost> {
+    return this.http.post<ExpensePost>(`${environment.baseUrl}${environment.api_expensecategories_post}`, expensePost)
+      .pipe(
+        map((response: ExpensePost) => {
+          console.log("Fetched data: ", response); 
+          return response;
+        }),
+        catchError((error) => {
+            console.log("Error in login API call: ", error);
+            return throwError(error);
+        }),
+      )
   }
-
-  public getExpensesByUser() : void {
-    this.http.get<any>(`${environment.baseUrl}${environment.api_expenses_getByUser}`);
-  }
-
-  public addExpense(category: string, subcategory: string, brand: string, suma: string, createdAt: Date): Observable<Partial<Expenses>> {
-    return this.http.post<Expenses>(`${environment.baseUrl}${environment.api_expenses_put}`, {subcategory, brand, suma, createdAt});
-  }
-
-  public deleteExpense(id: number): Observable<Expenses> {
-    return this.http.delete<Expenses>(`${environment.baseUrl}${environment.api_expenses_delete}/${id}`);
-  }
-
 }

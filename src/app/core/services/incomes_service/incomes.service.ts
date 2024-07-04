@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../environment';
 import { AddIncome } from '../../interfaces/IncomeDTO/AddIncome';
+import { ExtractIncomeCategories } from '../../interfaces/IncomeCategoriesDTO/extractincomecategories.interface';
+import { JwtDecoderService } from '../../jwt_decoder/jwt-decoder.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +12,12 @@ import { AddIncome } from '../../interfaces/IncomeDTO/AddIncome';
 export class IncomesService {
 
   constructor(
-    private http : HttpClient
+    private http : HttpClient, private jwtDecoder: JwtDecoderService
   ) { }
 
-  public postIncomeService(incomeObject: AddIncome) : Observable<AddIncome>{
+  userId = this.jwtDecoder.userId;
 
+  public postIncomeService(incomeObject: AddIncome) : Observable<AddIncome>{
     return this.http.post<AddIncome>(`${environment.baseUrl}${environment.api_incomes_createIncome}`, incomeObject).pipe(
       map((response: AddIncome) => {
         console.log("Fetched data: ", response); 
@@ -26,6 +29,20 @@ export class IncomesService {
       })
     )
   }
+
+  public getIncomeCategoriesByUser(): Observable<any> {
+    const params = new HttpParams().set('userId', this.userId);
+    return this.http.get<any>(`${environment.baseUrl}${environment.api_incomeCategories_getIncomeCategories}`, {params})
+      .pipe(
+        tap(data => console.log('Fetched categories:', data)),
+        map(response => response),  
+        catchError(error => {
+          console.error('Error fetching categoriesdodo:', error);
+          return throwError(() => new Error('Error fetching categories'));
+        })
+      );
+  }
+
 
   // public getUserIncomes(id: number) : Observable<Incomes[]> {
   //   const url = `${environment.baseUrl}${environment.api_incomes_getIncomesByUserId}/${id}`;

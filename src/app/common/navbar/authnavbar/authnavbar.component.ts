@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogActions, MatDialogConfig, MatDialogContent, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Route, Router, RouterLink } from '@angular/router';
@@ -18,6 +18,8 @@ import { IncomesService } from '../../../core/services/incomes_service/incomes.s
 import { AddIncome } from '../../../core/interfaces/IncomeDTO/AddIncome';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExpenseCategories } from '../../../core/interfaces/ExpenseCategoriesDTO/expense_categories.interface';
+import { ExtractIncomeCategories } from '../../../core/interfaces/IncomeCategoriesDTO/extractincomecategories.interface';
+import { JwtDecoderService } from '../../../core/jwt_decoder/jwt-decoder.service';
 
 @Component({
   selector: 'app-authnavbar',
@@ -32,7 +34,6 @@ export class AuthnavbarComponent {
   authService = inject(AuthService);
 
   constructor(
-    private authService: AuthService
   ) {}
 
   checkIfIsLogged: boolean = this.authService.isAuthenticated();
@@ -81,7 +82,7 @@ export class NavbarDialogContent {
   imports: [MatDialogModule, MatButtonModule, ExpensesComponent, IncomesComponent, SavingsComponent, RouterLink, MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, MatRadioModule, ReactiveFormsModule, FormsModule],
 })
 export class IncomeDialogContent{
-  expenseCategories: any[] = [];
+  incomeCategories: any[] = [];
   errorMessage: string = '';
   formIncomeDialog!: FormGroup;
   radioButtonChecked = false;
@@ -94,7 +95,8 @@ export class IncomeDialogContent{
   reccurence: boolean = false;
 
   constructor(private expenseCategoriesService: ExpensecategoriesService, private fb: FormBuilder, private incomeService: IncomesService, 
-    private router: Router, private matSnackBar: MatSnackBar){}
+    private router: Router, private matSnackBar: MatSnackBar, private jwtDecoder: JwtDecoderService){
+    }
   
   ngOnInit(): void{
     this.fetchIncomeCategories();
@@ -134,12 +136,13 @@ export class IncomeDialogContent{
   }
   
   fetchIncomeCategories(): void {
-    this.expenseCategoriesService.getExpenseCategoriesByUser()
+    this.incomeService.getIncomeCategoriesByUser()
       .subscribe({
-        next: (data) => this.expenseCategories = data,
+        next: (data) => this.incomeCategories = data,
         error: (error) => this.errorMessage = error.message
       });
   }
+
 
   postIncome(){
     this.userIncome = {
@@ -147,7 +150,7 @@ export class IncomeDialogContent{
       Amount: this.budget,
       Description: this.description,
       Reccurence: this.reccurence,
-      UserId: 1
+      UserId: this.jwtDecoder.userId
     }
     this.incomeService.postIncomeService(this.userIncome).subscribe({
       next: (response) => {

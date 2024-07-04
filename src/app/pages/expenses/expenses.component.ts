@@ -5,11 +5,20 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogDataExpenses } from '../../core/interfaces/expenses.dialog.interface';
 import { AuthnavbarComponent } from '../../common/navbar/authnavbar/authnavbar.component';
 import {MatIconRegistry, MatIconModule} from '@angular/material/icon';
 import { ExpensesService } from '../../core/services/expenses_service/expenses.service';
+import { ExpensecategoriesService } from '../../core/services/expensecategories_service/expensecategories.service';
+import { IncomesComponent } from '../incomes/incomes.component';
+import { Router, RouterLink } from '@angular/router';
+import { MatOption, MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import { MatRadioModule } from '@angular/material/radio';
+import { JwtDecoderService } from '../../core/jwt_decoder/jwt-decoder.service';
+import { ExpensePost } from '../../core/interfaces/ExpensesDTO/expensesPost.inteface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const EXPENSES_DATA : Expenses[] = [
   {id: 1, subcategory: "Mancare", brand: "McDonalds", suma: "50", createdAt: new Date("20-03-2020")}, 
@@ -30,7 +39,7 @@ export class ExpensesComponent {
   readonly dialog = inject(MatDialog);
 
   constructor(
-    private expensesService: ExpensesService
+    private expensesService: ExpensesService, private expenseCategoryService: ExpensecategoriesService
   ) { }
 
   subcategory: string = '';
@@ -42,50 +51,22 @@ export class ExpensesComponent {
 
   dialogTitle: string = '';
   
-  displayedColumns: string[] = ["subcategory", "brand", "suma", "createdAt", "action"]; 
+  displayedColumns: string[] = ["Category", "Amount", "CreatedAt", "Description","Action"]; 
   dataSource = EXPENSES_DATA;
 
   modify() {
-    this.isEdit = true;
-    this.dialogTitle = "Modifica cheltuiala";
-    this.dialog.open(DialogOverview, {
-      data: {subcategory: this.subcategory, brand: this.brand, suma: this.suma}
-    });
 
-    //TODO: get data from button clicked and add it to dialog's fields
-    //TODO: make request to delete from db
   }
 
   deleteExpense() : void { 
-    this.isEdit = false; 
-    const dialogRef = this.dialog.open(DialogDelete, {
-      
-    });
+    
   }
 
   addExpense() : void {
-    this.isEdit = false;
-    this.dialogTitle = "Adauga cheltuiala";
-    const dialogRef = this.dialog.open(DialogOverview, {
-      data: { subcategory: this.subcategory, brand: this.brand, suma: this.suma}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("Dialog was closed!");
-    })
-
-    if(!this.subcategory || !this.brand || !this.suma) {
-      this.error = "Toate campurile sunt obligatorii!";
-    } else if (parseInt(this.suma) < 0) {
-      this.error = "Suma nu poate fi negativa!";
-    } else { 
-
-      let category: string = 'Cheltuiala';
-      let createdAt: Date = new Date();
-      this.expensesService.addExpense(category, this.subcategory, this.brand, this.suma, createdAt).subscribe();
-    }
+    const incomeDialogRef = this.dialog.open(AddExpenseDialog);
   }
 }
+
 
 @Component({
   selector: 'dialog-overview-example-dialog', 
@@ -93,29 +74,81 @@ export class ExpensesComponent {
   styleUrl: 'dialog-overview.scss',
   standalone: true, 
   imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
+    MatDialogModule, MatButtonModule, ExpensesComponent, IncomesComponent, RouterLink, MatFormFieldModule, MatInputModule, MatSelectModule, CommonModule, MatRadioModule, ReactiveFormsModule, FormsModule
   ],
 })
 
-export class DialogOverview {
-  readonly dialogRef = inject(MatDialogRef<DialogOverview>); 
-  readonly data = inject<DialogDataExpenses>(MAT_DIALOG_DATA);
-  
-  dialogTitle: string = "";
-  category: string = '';
-  subcategory: string = '';
-  brand: string = '';
-  suma: string = '';
+export class AddExpenseDialog {
+  expenseCategories: any[] = []
+  categoryId: number = 0;
+  selectedCategory: string = '';
+  addExpenseForm!: FormGroup;
+  expenseToPost!: ExpensePost;
+  amount: number = 0;
+  description: string = '';
+  constructor(private fb: FormBuilder, private expenseCategoryService: ExpensecategoriesService, 
+    private expenseService: ExpensesService, private jwtDecoder: JwtDecoderService,
+      private matSnackBar: MatSnackBar, private router: Router){}
 
-  onNoClick() : void {
-    this.dialogRef.close();
+  ngOnInit(){
+    this.getExpenseCategories();
+    this.addExpenseForm = this.fb.group({
+      amountControl: ['', [Validators.required, Validators.min(1)]],
+      descriptionControl: ['', [Validators.maxLength(50)]],
+    })
+    this.addExpenseForm.get("amountControl")?.valueChanges.subscribe((value: number) => {
+      this.addExpenseForm.markAllAsTouched();
+      this.amount = value;
+    })
+    this.addExpenseForm.get("descriptionControl")?.valueChanges.subscribe((value: string) => {
+      this.addExpenseForm.markAllAsTouched();
+      this.description = value;
+    })
+  }
+
+  changeClient(event: MatSelectChange){
+    const selectedData = {
+      text: (event.source.selected as MatOption).viewValue,
+      value: event.source.value
+    };
+    this.categoryId = selectedData.value;
+    this.selectedCategory = selectedData.text;
+    console.log(this.selectedCategory);
+  }
+
+  public getExpenseCategories(){
+    console.log(this.expenseCategoryService.userId);
+    this.expenseCategoryService.getExpenseCategoriesByUser().subscribe({
+      next: (response) => this.expenseCategories = response,
+      error: (error) => console.log(error)
+    })
+    console.log(this.expenseCategories);
+  }
+
+  postExpense(){
+  this.expenseToPost = {
+    Amount: Number(this.amount),
+    Description: this.description,
+    UserId: Number(this.jwtDecoder.userId),
+    Expense_CategoryId: this.categoryId,
+    CurrencyId: 1
+  }
+    this.expenseService.postNewExpenseCategory(this.expenseToPost).subscribe({
+      next: (response) => {
+        const finalResponse = this.matSnackBar.open('The income was saved', 'Close', {
+          duration: 5000,
+          horizontalPosition: 'center'
+        })
+        this.router.navigate(['/expenses']);
+      },
+      error: (error) => {
+        const errorMessage = error?.error?.response || 'The income was not saved. Please try again';
+        this.matSnackBar.open(errorMessage, 'Close', {
+          duration: 5000,
+          horizontalPosition: 'center',
+        });
+      },
+    })
   }
 }
 
