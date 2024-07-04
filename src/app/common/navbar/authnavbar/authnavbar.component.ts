@@ -27,6 +27,13 @@ export class AuthnavbarComponent {
   readonly dialog = inject(MatDialog);
   authService = inject(AuthService);
 
+  constructor(
+    private authService: AuthService
+  ) {}
+
+  checkIfIsLogged: boolean = this.authService.isAuthenticated();
+  profilePhoto: string = '';
+
   openDialog() {
     const dialogRef = this.dialog.open(NavbarDialogContent);
 
