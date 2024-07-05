@@ -1,17 +1,23 @@
-<div class="bg-green-500  text-white rounded-tr-2xl w-full flex flex-row h-[3rem] items-center justify-between">
-    <div class="flex gap-14 px-5 justify-start">
-        <button mat-icon-button routerLink=""> <img src="/assets/image.png" alt="logo_img" style="height: 60px;"> </button>
+<div class="bg-green-500 text-white flex items-center justify-between px-6 py-2">
+    <div class="flex items-center gap-4">
+      <a routerLink="/" class="flex items-center">
+        <img src="/assets/image.png" alt="logo_img" class="h-12">
+      </a>
     </div>
-
-    <div class="flex gap-14 px-5 justify-end">
-        <button mat-icon-button routerLink="/incomes" class>Incomes</button>
-        <button mat-icon-button routerLink="/expenses">Expenses</button>
-        <button mat-icon-button routerLink="/savings">Economies</button>
-        <button mat-icon-button (click)="openDialog()" class="bg-green-700 
-        p-1 w-20 text-white rounded-md">Add</button>
-        <!-- <div *ngIf="checkIfIsLogged" class="flex flex-row">
-            <img [src]="profilePhoto" class="w-10 h-10 cursor-pointer mr-10" [routerLink]="['useraccount', getUserData]" />
-            <button (click)="signOut()">Sign Out</button>
-        </div> -->
+    <div class="flex items-center gap-6">
+      <a routerLink="/incomes" class="hover:text-gray-200">Incomes</a>
+      <a routerLink="/expenses" class="hover:text-gray-200">Expenses</a>
+      <a routerLink="/savings" class="hover:text-gray-200">Economies</a>
+      <button (click)="openDialog()" class="bg-green-700 hover:bg-green-600 text-white py-1 px-4 rounded-md">Add</button>
+      <div class="relative">
+        <button (click)="toggleDropdown()" class="flex items-center focus:outline-none">
+          <img src="/assets/profile-user.png" alt="profile_img" class="h-7 w-7 rounded-full">
+        </button>
+        <div *ngIf="showDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+          <a [routerLink]="['/useraccount', userId]" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+          <button (click)="signOut()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Out</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  

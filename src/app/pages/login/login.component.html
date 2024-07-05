@@ -1,22 +1,50 @@
-<app-unauthnavbar></app-unauthnavbar>
-<div class="flex justify-center items-center flex-col h-screen bg-gray-200">
-    <form class="flex flex-col w-full max-w-sm  bg-white p-6 rounded-lg shadow-blue-400 shadow-2xl" (ngSubmit)="onLogin()">
-        <h1 class="text-4xl mb-8 font-bold text-gray-800 mb-12">Login</h1>
-      <mat-form-field class="mb-4 w-full">
-        <mat-label for="username">Username</mat-label>
-        <input matInput type="text" id="username" name="username" class="rounded-lg bg-gray-50 px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" [formControl]="emailFormControl" />
-        <mat-error *ngIf="emailFormControl.hasError('error') && emailFormControl.hasError('required')">
-          Something is wrong
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="mb-4 w-full">
-        <mat-label for="password">Password</mat-label>
-        <input matInput type="password" id="password" name="password" [(ngModel)]="password" class="rounded-lg bg-gray-50 px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" [formControl]="passwordFormControl" />
-      </mat-form-field>
-      <a class="text-blue-500 mb-4 cursor-pointer text-right" [routerLink]="'/forgotpassword'" routerLinkActive="router-link-active">Forgot Password?</a>
-      <button type="submit" class="bg-blue-500 w-full h-12 rounded-lg text-white font-semibold hover:bg-blue-600 transition duration-300">Login</button>
-    </form>
-    <p> User: razvan20</p>
-    <p> Password : Tester_1234%567 </p>
+<section class="h-screen flex">
+  <div class="flex w-full">
+    <div class="w-full lg:w-1/2 flex flex-col justify-center items-center bg-white p-10">
+      <form class="w-full max-w-md" (ngSubmit)="onLogin()">
+        <h3 class="text-3xl font-bold mb-8">Log in</h3>
+
+        <div class="mb-4">
+          <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+          <input matInput type="text" id="username" name="username" [formControl]="usernameFormControl" class="form-input w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+          <mat-error *ngIf="usernameFormControl.hasError('required') && (usernameFormControl.touched || submitted)">
+            Username is required
+          </mat-error>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+          <input matInput type="password" id="password" name="password" [formControl]="passwordFormControl" [(ngModel)]="password" class="form-input w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required minlength="8" />
+          <mat-error *ngIf="passwordFormControl.hasError('required') && (passwordFormControl.touched || submitted)">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="passwordFormControl.hasError('minlength') && (passwordFormControl.touched || submitted)">
+            Password must be at least 8 characters long
+          </mat-error>
+        </div>
+
+        <div class="flex justify-end mb-4">
+          <a class="text-gray-400 hover:text-gray-950 transition duration-300" [routerLink]="'/forgotpassword'" routerLinkActive="router-link-active">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="bg-green-500 w-full h-12 rounded-lg text-white font-semibold hover:bg-green-600 transition duration-300">Login</button>
+        
+        <div class="flex justify-center my-5">
+          Don't have an account? <a class="text-green-500 hover:text-green-600 font-bold transition duration-300 ms-1" [routerLink]="'/register'" routerLinkActive="router-link-active"> Register!</a>
+        </div>
+      </form>
+
+      <div class="mt-8 text-center text-gray-600">
+        <p>User: <span class="font-semibold">razvan20</span></p>
+        <p>Password: <span class="font-semibold">Tester_1234%567</span></p>
+      </div>
+    </div>
+    <div class="w-1/2 hidden lg:flex items-center justify-center bg-gradient-to-r from-teal-500 to-green-500">
+      <img src="/assets/img3.jpg" alt="Login image" class="w-full h-full object-cover object-left rounded-r-2xl">
+    </div>
   </div>
-  
+</section>
+
+<!-- Add Tailwind CSS and Material Icons -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

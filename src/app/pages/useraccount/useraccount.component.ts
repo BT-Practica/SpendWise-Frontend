@@ -1,105 +1,68 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDetailsService } from '../../core/services/userdetails_service/user-details.service';
-import { User } from '../../core/interfaces/user.interface';
+import { JwtDecoderService } from '../../core/jwt_decoder/jwt-decoder.service';
 import { CommonModule } from '@angular/common';
 import { AuthnavbarComponent } from '../../common/navbar/authnavbar/authnavbar.component';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatButtonModule } from '@angular/material/button';
-import { routes } from '../../app.routes';
 
 @Component({
-  selector: 'app-useraccount',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatButtonModule, 
-    AuthnavbarComponent,
-    CommonModule,
-  ],
+  selector: 'app-user-account',
   templateUrl: './useraccount.component.html',
-  styleUrl: './useraccount.component.scss'
+  styleUrls: ['./useraccount.component.scss'],
+  standalone: true,
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, AuthnavbarComponent]
 })
-export class UseraccountComponent implements OnInit {
-  options: string[] = ['USD', 'EUR', 'RON'];
-  filteredOptions: Observable<string[]> = new Observable();
+export class UserAccountComponent implements OnInit {
   form: FormGroup;
-  user: User | undefined; 
+  userId: number;
+  user: any; 
 
-  constructor(
-    private userDetailsService: UserDetailsService,
-    private route: ActivatedRoute
-  ) {
-    this.form = new FormGroup({
-      username: new FormControl({ value: '', disabled: false }),
-      email: new FormControl({ value: '', disabled: false }),
-      currency: new FormControl(''),
-      createdAt: new FormControl('')
+  constructor(private fb: FormBuilder, private userService: UserDetailsService, private jwtService: JwtDecoderService) {
+    this.userId = this.jwtService.userId; 
+    this.form = this.fb.group({
+      userName: [''], 
+      email: [''],
+      currency: [null],  
+      createdDate: [{value: '', disabled: true}]  
     });
   }
-  userId!: string; // Define userId property
-  userData: User | undefined;
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.userId = params['userId']; // Get userId from route params
-      if (this.userId) {
-        this.getUserData(); // Fetch user data if userId is available
-      } else {
-        console.error('No userId found.');
-      }
-    });
+    this.loadUserData();
   }
 
-  getUserData(): void {
-    this.userDetailsService.getUserById(parseInt(this.userId)).subscribe(
-      (user?: User) => {
-        this.userData = user;
-        console.log('User data:', this.userData);
-        // Additional logic to handle user data
-      },
-      error => {
-        console.error('Error fetching user data', error);
-      }
-    );
-  }
-
-  loadData(id: number): void {
-    this.userDetailsService.getUserById(id).subscribe({
+  loadUserData(): void {
+    this.userService.getUserById(this.userId).subscribe({
       next: (data) => {
+        console.log(data);  
         if (data) {
           this.user = data;
-          this.form.controls['username'].setValue(data.username);
-          this.form.controls['email'].setValue(data.email);
-          this.form.controls['currency'].setValue(data.currency);
-          this.form.controls['createdAt'].setValue(  data.createdAt.getDate() + '-' + (data.createdAt.getMonth() + 1) + '-' + data.createdAt.getFullYear());
-        } else {
-          console.error('User data not found');
+          const formData = {
+            userName: this.user.userName,
+            email: this.user.email,
+            currency: this.user.currency || 'No currency set', 
+            createdDate: this.formatDate(this.user.createdDate) 
+          };
+          this.form.patchValue(formData);
         }
       },
-      error: (err) => {
-        console.error('Error fetching user data', err);
-      }
+      error: (err) => console.error('Failed to load user data', err)
     });
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    return date.toLocaleDateString('en-US', options);
   }
 
-  get isFormPristine(): boolean {
-    return this.form.pristine;
+  onUpdate(): void {
+    console.log('Update User Data', this.form.value);
   }
-
 }

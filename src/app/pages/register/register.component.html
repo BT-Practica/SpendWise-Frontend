@@ -1,34 +1,41 @@
-<app-unauthnavbar></app-unauthnavbar>
-<div class="register_form">
-    <div class="container form">
-        <h1 class="heading"> Register </h1>
-
-        <form (ngSubmit)="register()" (keydown)="onKeyDown($event)">
-            <mat-form-field [style.width.px]=300>
-                <mat-label>Username</mat-label>
-                <input [(ngModel)]="username" class="rounded-5" matInput type="text" name="username" placeholder="Username" required>
-            </mat-form-field>
-            <mat-form-field [style.width.px]=300>
-                <mat-label>Email</mat-label>
-                <input [(ngModel)]="email" matInput type="text" placeholder="Email" name="email" required>
-                
-            </mat-form-field>
-            <mat-form-field [style.width.px]=300>
-                <mat-label>Confim Email</mat-label>
-                <input [(ngModel)]="confirmEmail" matInput type="text" placeholder="Confirm Email" name="confirmEmail" required>
-            </mat-form-field>
-            <mat-form-field [style.width.px]=300>
-                <mat-label>Password</mat-label>
-                <input [(ngModel)]="password" matInput type="password" placeholder="Password" name="password" required> 
-            </mat-form-field>
-            <mat-form-field [style.width.px]=300>
-                <mat-label>Confirm Password</mat-label>
-                <input [(ngModel)]="confirmPassword" matInput type="password" placeholder="Confirm Password" name="confirmPassword" required>
-            </mat-form-field>
-            <button mat-flat-button [style.width.px]=300 type="submit"> Register</button>
-            <span style="color: red;">{{error ? error : ''}}</span>
-
-            <span>Already have an account?<a style="color: #00DDDD; text-decoration: none;" href="/login"> Login!</a></span>
+<section class="h-screen flex">
+    <div class="flex w-full">
+      <div class="w-full lg:w-1/2 flex flex-col justify-center items-center bg-white p-10">
+        <form class="w-full max-w-md" (ngSubmit)="register()">
+          <h3 class="text-3xl font-bold mb-4">Register</h3>
+          <div class="mb-2">
+            <label for="username" class="block text-gray-700 text-sm font-bold mb-1">Username</label>
+            <input matInput type="text" id="username" name="username" [(ngModel)]="username" class="form-input w-full px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+          </div>
+          <div class="mb-2">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-1">Email address</label>
+            <input matInput type="email" id="email" name="email" [(ngModel)]="email" class="form-input w-full px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+          </div>
+          <div class="mb-2">
+            <label for="confirmEmail" class="block text-gray-700 text-sm font-bold mb-1">Confirm Email</label>
+            <input matInput type="email" id="confirmEmail" name="confirmEmail" [(ngModel)]="confirmEmail" class="form-input w-full px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+          </div>
+          <div class="mb-2">
+            <label for="password" class="block text-gray-700 text-sm font-bold mb-1">Password</label>
+            <input matInput type="password" id="password" name="password" [(ngModel)]="password" class="form-input w-full px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required minlength="8" />
+          </div>
+          <div class="mb-2">
+            <label for="confirmPassword" class="block text-gray-700 text-sm font-bold mb-1">Confirm Password</label>
+            <input matInput type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" class="form-input w-full px-2 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required minlength="8" />
+          </div>
+          <button type="submit" class="bg-green-500 w-full h-10 rounded-lg text-white font-semibold hover:bg-green-600 transition duration-300">Register</button>
         </form>
+        <div class="flex justify-center my-3">
+          Already have an account? <a class="text-green-500 hover:text-green-600 font-bold transition duration-300 ms-1" [routerLink]="'/login'" routerLinkActive="router-link-active"> Login!</a>
+        </div>
+      </div>
+      <div class="w-1/2 hidden lg:flex items-center justify-center bg-gradient-to-r from-teal-500 to-green-500">
+        <img src="/assets/img3.jpg" alt="Register image" class="w-full h-full object-cover object-left rounded-r-2xl">
+      </div>
     </div>
-</div>
+  </section>
+  
+  <!-- Add Tailwind CSS and Material Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  

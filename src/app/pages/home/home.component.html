@@ -1,107 +1,77 @@
 <app-authnavbar></app-authnavbar>
-<div>
-    <div class="grid grid-cols-3 justify-center items-center m-10 gap-10 ">
-        <div class="mt-2 text-center bg-gradient-to-r from-green-500 to-lime-500 to- rounded-2xl h-[6rem] flex justify-center items-center flex-col">
-            <h1>Total period income</h1>
-            <p class="ml-10 text-3xl">{{income_total}}</p>
-        </div>
-        <div class="text-center bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl h-[6rem] flex justify-center items-center flex-col">
-            <h1>Total period Expenses</h1>
-            <p class="ml-10 text-3xl">{{expenses_total}}</p>
-        </div>
-        <div class="text-center bg-gradient-to-r from-blue-500 to-cyan-500  rounded-2xl h-[6rem] flex justify-center items-center flex-col">
-            <h1>Total Balance</h1>
-            <p class="ml-10 text-3xl">{{balance_total}}</p>
-        </div>
+<div class="p-6">
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+    <div class="bg-white shadow-md rounded-2xl h-24 flex flex-col justify-center items-center text-gray-800">
+      <h1 class="text-sm font-semibold">Total period income</h1>
+      <p class="text-3xl">{{income_total}}</p>
     </div>
+    <div class="bg-white shadow-md rounded-2xl h-24 flex flex-col justify-center items-center text-gray-800">
+      <h1 class="text-sm font-semibold">Total period expenses</h1>
+      <p class="text-3xl">{{expenses_total}}</p>
+    </div>
+    <div class="bg-white shadow-md rounded-2xl h-24 flex flex-col justify-center items-center text-gray-800">
+      <h1 class="text-sm font-semibold">Total balance</h1>
+      <p class="text-3xl">{{balance_total}}</p>
+    </div>
+  </div>
 
-    <!-- TODO : EGALITATE LATURI  -->
-    <!-- TODO: ALINIERE IN DIV CARDURI -->
-    
-    <div class="bg-white cta">
-      <div class="mx-auto max-w-7xl py-10 sm:px-6 sm:py-10 lg:px-10">
-        <div class="relative isolate overflow-hidden bg-emerald-500 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-          <svg viewBox="0 0 1024 1024" class="absolute left-12 top-12 -z-10 h-[64rem] w-[64rem] -translate-y-12 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-12 lg:ml-0 lg:translate-x-12 lg:translate-y-0" aria-hidden="true">
-            <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7"></circle>
-            <defs>
-              <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-                <stop stop-color="#7775D6"></stop>
-                <stop offset="1" stop-color="#E935C1"></stop>
-              </radialGradient>
-            </defs>
-          </svg>
-          <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Afla cateva <span class="text-emerald-300">tips & tricks</span><br>Incepe sa salvezi bani acum!
-            </h2>
-            <p class="mt-6 text-lg leading-8 text-gray-300">
-              Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla.
-            </p>
-            <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-              <a href="/tips" routerLinkActive="router-link-active" class="rounded-md cursor-pointer bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-                Incepe acum
-              </a>            
-            </div>
-          </div>
-          <div class="relative mt-16 h-80 lg:mt-8">
-            <img class="absolute left-0 top-0 px-5 w-[30rem] max-w-none rounded-md ring-white/10" src="https://static.vecteezy.com/system/resources/previews/021/186/896/original/bag-of-money-3d-illustration-png.png" alt="App screenshot" width="1824" height="1080">
-          </div>
-        </div>
+  <div class="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-3xl p-8 mb-10 text-white shadow-lg">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div class="lg:flex-1 px-10">
+        <h2 class="text-3xl font-bold mb-4">
+          Discover <span class="text-emerald-300">tips & tricks</span><br>Start saving money now!
+        </h2>
+        <p class="mb-6">
+          Learn how to manage your finances better and achieve your savings goals with our easy-to-follow tips and tricks.
+        </p>
+        <a href="/tips" class="inline-block bg-white text-emerald-900 font-semibold px-4 py-2 rounded-md hover:bg-gray-100">
+          Get Started
+        </a>
+      </div>
+      <div class="mt-6 lg:mt-0 lg:flex-1 flex justify-center">
+        <img src="https://static.vecteezy.com/system/resources/previews/021/186/896/original/bag-of-money-3d-illustration-png.png" alt="App screenshot" class="w-64 lg:w-100">
       </div>
     </div>
-    
-    <div class="columns-2">      
-      <div>
-        <h1 class="headingTableExpenses font-semibold"> Cheltuieli </h1>
-        <div class="mat-elevationa-z8">
-          <table mat-table dataSource=[]> 
-            <ng-container matColumnDef="">
-              <th mat-header-cell *matHeaderCellDef=""></th>
-              <td mat-cell *matCellDef=""></td>
-            </ng-container>
+  </div>
 
-            <ng-container matColumnDef="">
-              <th mat-header-cell *matHeaderCellDef=""></th>
-              <td mat-cell *matCellDef=""></td>
-            </ng-container>
-
-            <ng-container matColumnDef="">
-              <th mat-header-cell *matHeaderCellDef=""></th>
-              <td mat-cell *matCellDef=""></td>
-            </ng-container>
-
-            <ng-container matColumnDef="">
-              <th mat-header-cell *matHeaderCellDef=""></th>
-              <td mat-cell *matCellDef=""></td>
-            </ng-container>
-          </table>
-        </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <h1 class="text-xl font-semibold text-gray-700 mb-4">Expenses</h1>
+      <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <!-- Table rows go here -->
+          </tbody>
+        </table>
       </div>
-      <div>
-        <h1 class="headingTableIncomes font-semibold"> Venituri </h1>
-        <div class="mat-elevationa-z8">
-          <table mat-table dataSource=[]> 
-            <ng-container matColumnDef="">
-              <th mat-header-cell *matHeaderCellDef=""></th>
-              <td mat-cell *matCellDef=""></td>
-            </ng-container>
-
-            <ng-container matColumnDef="">
-              <th mat-header-cell *matHeaderCellDef=""></th>
-              <td mat-cell *matCellDef=""></td>
-            </ng-container>
-
-            <ng-container matColumnDef="">
-              <th mat-header-cell *matHeaderCellDef=""></th>
-              <td mat-cell *matCellDef=""></td>
-            </ng-container>
-
-            <ng-container matColumnDef="">
-              <th mat-header-cell *matHeaderCellDef=""></th>
-              <td mat-cell *matCellDef=""></td>
-            </ng-container>
-          </table>
-        </div>
-      </div>
-
     </div>
+    <div>
+      <h1 class="text-xl font-semibold text-gray-700 mb-4">Incomes</h1>
+      <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Source</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <!-- Table rows go here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Tailwind CSS and Material Icons -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

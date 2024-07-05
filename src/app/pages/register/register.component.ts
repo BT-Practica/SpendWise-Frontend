@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth_service/auth.service';
 import { UnauthnavbarComponent } from '../../common/navbar/unauthnavbar/unauthnavbar.component'
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, CommonModule, FormsModule, ReactiveFormsModule, UnauthnavbarComponent],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, RouterLink, MatIconModule, CommonModule, FormsModule, ReactiveFormsModule, UnauthnavbarComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

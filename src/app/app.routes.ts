@@ -5,7 +5,7 @@ import { SavingsComponent } from './pages/savings/savings.component';
 import { IncomesComponent } from './pages/incomes/incomes.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
-import { UseraccountComponent } from './pages/useraccount/useraccount.component';
+import { UserAccountComponent } from './pages/useraccount/useraccount.component';
 import { AuthguardService } from './core/guards/auth_guard/authguard.service';
 
 export const routes: Routes = [
@@ -26,13 +26,14 @@ export const routes: Routes = [
     }, 
         canActivate: [AuthguardService]
     },
-    { path: 'useraccount/:userId', loadComponent: () => { 
-        return import('./pages/useraccount/useraccount.component').then(
-            (m) => m.UseraccountComponent
-        );   
-        
-    } 
-},
+    { 
+        path: 'useraccount/:userId', loadComponent: () => { 
+            return import('./pages/useraccount/useraccount.component').then(
+                (m) => m.UserAccountComponent
+            )  
+        }, 
+        canActivate: [AuthguardService]
+    },
     { path: "expenses", loadComponent: () => { 
         return import('./pages/expenses/expenses.component').then(
             (m) => m.ExpensesComponent
@@ -65,6 +66,15 @@ export const routes: Routes = [
                 (m) => m.ForgotpasswordComponent
             )
         }
+    },
+    {
+        path: 'tip/:id', 
+        loadComponent : () => {
+            return import("./pages/tipdetail/tipdetail.component").then(
+                (m) => m.TipdetailComponent
+            )
+        },
+        canActivate: [AuthguardService]
     },
     {
         path:"resetpassword",

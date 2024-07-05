@@ -11,11 +11,12 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AuthnavbarComponent } from '../../common/navbar/authnavbar/authnavbar.component';
 
 @Component({  
   selector: 'app-savings',
   standalone: true,
-  imports: [MatFormFieldModule, FormsModule, MatButtonModule],
+  imports: [MatFormFieldModule, FormsModule, MatButtonModule, AuthnavbarComponent],
   templateUrl: './savings.component.html',
   styleUrl: './savings.component.scss'
 })

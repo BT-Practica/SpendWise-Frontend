@@ -13,3 +13,22 @@
 .expenses {
     margin: 30px auto;
 }
+
+.uniform-row-height .mat-row,
+.uniform-row-height .mat-header-row {
+  height: 56px; /* You can adjust this value as needed */
+}
+
+.uniform-row-height .mat-cell,
+.uniform-row-height .mat-header-cell {
+  padding: 8px 16px; /* Ensure padding is consistent */
+}
+
+.uniform-row-height .mat-row .mat-cell {
+  display: flex;
+  align-items: center; /* Center-align content vertically */
+}
+
+.uniform-row-height .mat-row .mat-cell button {
+  margin: 0 auto; /* Center-align buttons */
+}
